@@ -7,9 +7,9 @@
       <div class="input-error-text">{{ inputError }}</div>
     }
   </div>
-  @if (tasks.length > 0) {
+  @if (tasks().length > 0) {
     <ul>
-      @for (task of tasks; track task.id) {
+      @for (task of tasks(); track task.id) {
         <li>
           <input type="checkbox" [checked]="task.isDone" (change)="onChangeTaskStatus(task.id, $event)"/>
           <span>{{ task.title }}</span>
@@ -21,8 +21,8 @@
     <p>Нет тасок</p>
   }
   <div>
-    <app-button [title]="'All'" (clicked)="onFilter('all')" [buttonClass]="filter === 'all' ? 'active-filter' : ''"></app-button>
-    <app-button [title]="'Active'" (clicked)="onFilter('active')" [buttonClass]="filter === 'active' ? 'active-filter' : ''"></app-button>
-    <app-button [title]="'Completed'" (clicked)="onFilter('completed')" [buttonClass]="filter === 'completed' ? 'active-filter' : ''"></app-button>
+    <app-button [title]="'All'" (clicked)="onFilter('all')" [buttonClass]="filter() === 'all' ? 'active-filter' : ''"></app-button>
+    <app-button [title]="'Active'" (clicked)="onFilter('active')" [buttonClass]="filter() === 'active' ? 'active-filter' : ''"></app-button>
+    <app-button [title]="'Completed'" (clicked)="onFilter('completed')" [buttonClass]="filter() === 'completed' ? 'active-filter' : ''"></app-button>
   </div>
 </div>

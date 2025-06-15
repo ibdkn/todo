@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, Signal} from '@angular/core';
 import {Task, TaskStatus} from '../../interfaces/task.interface';
 import {ButtonComponent} from '../button/button.component';
 import {FormsModule} from '@angular/forms';
@@ -17,8 +17,8 @@ import {NgClass} from '@angular/common';
 })
 export class TodolistComponent {
   @Input() title: string = '';
-  @Input() tasks: Task[] = [];
-  @Input() filter: TaskStatus = 'all';
+  @Input() tasks!: Signal<Task[]>;
+  @Input() filter!: Signal<TaskStatus>;
 
   @Output() deleted: EventEmitter<string> = new EventEmitter<string>();
   @Output() filtered: EventEmitter<TaskStatus> = new EventEmitter<TaskStatus>();

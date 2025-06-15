@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal} from '@angular/core';
 import {TodolistComponent} from './components/todolist/todolist.component';
 import {Task, TaskStatus} from './interfaces/task.interface';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,56 +10,41 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title: string = 'todo';
 
-  tasks = [
+  tasks: WritableSignal<Task[]> = signal<Task[]>([
     { id: uuidv4(), title: 'HTML&CSS', isDone: true },
     { id: uuidv4(), title: 'JS', isDone: true },
-    { id: uuidv4(), title: 'ReactJS', isDone: false },
-  ];
+    { id: uuidv4(), title: 'ReactJS', isDone: false }
+  ]);
 
-  filteredTasks: Task[] = [];
-
-  currentFilter: TaskStatus = 'all'
-
-  ngOnInit(): void {
-    this.filteredTasks = this.tasks.slice();
-  }
+  currentFilter: WritableSignal<TaskStatus> = signal<TaskStatus>('all');
+  filteredTasks: Signal<Task[]> = computed(() => {
+    const filter: TaskStatus = this.currentFilter();
+    const tasks: Task[] = this.tasks();
+    if (filter === 'active') return tasks.filter(t => !t.isDone);
+    if (filter === 'completed') return tasks.filter(t => t.isDone);
+    return tasks;
+  });
 
   deleteTask(taskId: string): void {
-    this.tasks = this.tasks.filter(t => t.id !== taskId);
-    this.updateFilter();
+    this.tasks.update(tasks => tasks.filter(t => t.id !== taskId));
   }
 
   changeFilter(taskStatus: TaskStatus): void {
-    this.currentFilter = taskStatus;
-    switch (taskStatus) {
-      case 'active':
-        this.filteredTasks = this.tasks.filter(t => !t.isDone);
-        break;
-      case 'completed':
-        this.filteredTasks = this.tasks.filter(t => t.isDone);
-        break;
-      default:
-        this.filteredTasks = this.tasks.slice();
-    }
+    this.currentFilter.set(taskStatus);
   }
 
   createTask(newTask: Task): void {
-    this.tasks = [...this.tasks, newTask];
-    this.updateFilter();
+    this.tasks.update(tasks => [...tasks, newTask]);
   }
 
   changeTaskStatus({ id, isDone }: Pick<Task, 'id' | 'isDone'>): void {
-    const task = this.tasks.find(t => t.id === id);
-    if (task) {
-      task.isDone = isDone;
-    }
-    this.updateFilter();
-  }
-
-  updateFilter(): void {
-    this.changeFilter(this.currentFilter);
+    this.tasks.update(tasks =>
+      tasks.map(t =>
+        t.id === id ? { ...t, isDone } : t
+      )
+    );
   }
 }
