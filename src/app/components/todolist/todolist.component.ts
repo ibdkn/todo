@@ -2,12 +2,15 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Task, TaskStatus} from '../../interfaces/task.interface';
 import {ButtonComponent} from '../button/button.component';
 import {FormsModule} from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-todolist',
   imports: [
     ButtonComponent,
-    FormsModule
+    FormsModule,
+    NgClass
   ],
   templateUrl: './todolist.component.html',
   styleUrl: './todolist.component.scss'
@@ -15,26 +18,44 @@ import {FormsModule} from '@angular/forms';
 export class TodolistComponent {
   @Input() title: string = '';
   @Input() tasks: Task[] = [];
+  @Input() filter: TaskStatus = 'all';
 
-  @Output() deleted: EventEmitter<number> = new EventEmitter<number>();
-  @Output() changed: EventEmitter<TaskStatus> = new EventEmitter<TaskStatus>();
+  @Output() deleted: EventEmitter<string> = new EventEmitter<string>();
+  @Output() filtered: EventEmitter<TaskStatus> = new EventEmitter<TaskStatus>();
   @Output() created: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output() changed: EventEmitter<Pick<Task, 'id' | 'isDone'>> = new EventEmitter<Pick<Task, 'id' | 'isDone'>>();
 
   taskTitle: string = '';
+  inputError: string = '';
 
-  onDelete(taskId: number): void {
+  onDelete(taskId: string): void {
     this.deleted.emit(taskId);
   }
 
-  onChangeFilter(status: TaskStatus): void {
-    this.changed.emit(status);
+  onFilter(status: TaskStatus): void {
+    this.filtered.emit(status);
   }
 
   onCreateTask(): void {
-    const id: number = this.tasks.length;
+    const id: string = uuidv4();
     const title: string = this.taskTitle.trim();
-    if (!title) return;
+    if (!title) {
+      this.inputError = 'Title is required';
+      return;
+    }
+    this.inputError = '';
     this.created.emit({id, title, isDone: false});
     this.taskTitle = '';
+  }
+
+  onChangeTaskStatus(id: string, e: Event): void {
+    const newTaskStatus: boolean = (e.currentTarget as HTMLInputElement).checked;
+    this.changed.emit({id, isDone: newTaskStatus});
+  }
+
+  onInput(): void {
+    if (this.inputError) {
+      this.inputError = '';
+    }
   }
 }

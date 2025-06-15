@@ -2,8 +2,10 @@
   <app-todolist
     [title]="'What to learn'"
     [tasks]="filteredTasks"
+    [filter]="currentFilter"
     (deleted)="deleteTask($event)"
-    (changed)="changeFilter($event)"
+    (filtered)="changeFilter($event)"
     (created)="createTask($event)"
+    (changed)="changeTaskStatus($event)"
   ></app-todolist>
 </div>

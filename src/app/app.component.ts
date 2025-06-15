@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {TodolistComponent} from './components/todolist/todolist.component';
 import {Task, TaskStatus} from './interfaces/task.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,12 @@ import {Task, TaskStatus} from './interfaces/task.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  title = 'todo';
+  title: string = 'todo';
 
   tasks = [
-    { id: 1, title: 'HTML&CSS', isDone: true },
-    { id: 2, title: 'JS', isDone: true },
-    { id: 3, title: 'ReactJS', isDone: false },
+    { id: uuidv4(), title: 'HTML&CSS', isDone: true },
+    { id: uuidv4(), title: 'JS', isDone: true },
+    { id: uuidv4(), title: 'ReactJS', isDone: false },
   ];
 
   filteredTasks: Task[] = [];
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
     this.filteredTasks = this.tasks.slice();
   }
 
-  deleteTask(taskId: number): void {
+  deleteTask(taskId: string): void {
     this.tasks = this.tasks.filter(t => t.id !== taskId);
     this.updateFilter();
   }
@@ -47,6 +48,14 @@ export class AppComponent implements OnInit {
 
   createTask(newTask: Task): void {
     this.tasks = [...this.tasks, newTask];
+    this.updateFilter();
+  }
+
+  changeTaskStatus({ id, isDone }: Pick<Task, 'id' | 'isDone'>): void {
+    const task = this.tasks.find(t => t.id === id);
+    if (task) {
+      task.isDone = isDone;
+    }
     this.updateFilter();
   }
 

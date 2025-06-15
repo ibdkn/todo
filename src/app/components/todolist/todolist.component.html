@@ -1,14 +1,17 @@
 <div>
   <h3>{{ title }}</h3>
   <div>
-    <input type="text" [(ngModel)]="taskTitle"/>
+    <input type="text" [ngClass]="{ 'input-error': inputError }" [(ngModel)]="taskTitle" (keydown.enter)="onCreateTask()" (input)="onInput()"/>
     <app-button [title]="'+'" (clicked)="onCreateTask()"></app-button>
+    @if (inputError) {
+      <div class="input-error-text">{{ inputError }}</div>
+    }
   </div>
   @if (tasks.length > 0) {
     <ul>
       @for (task of tasks; track task.id) {
         <li>
-          <input type="checkbox" [checked]="task.isDone"/>
+          <input type="checkbox" [checked]="task.isDone" (change)="onChangeTaskStatus(task.id, $event)"/>
           <span>{{ task.title }}</span>
           <app-button [title]="'x'" (clicked)="onDelete(task.id)"></app-button>
         </li>
@@ -18,8 +21,8 @@
     <p>Нет тасок</p>
   }
   <div>
-    <app-button [title]="'All'" (clicked)="onChangeFilter('all')"></app-button>
-    <app-button [title]="'Active'" (clicked)="onChangeFilter('active')"></app-button>
-    <app-button [title]="'Completed'" (clicked)="onChangeFilter('completed')"></app-button>
+    <app-button [title]="'All'" (clicked)="onFilter('all')" [buttonClass]="filter === 'all' ? 'active-filter' : ''"></app-button>
+    <app-button [title]="'Active'" (clicked)="onFilter('active')" [buttonClass]="filter === 'active' ? 'active-filter' : ''"></app-button>
+    <app-button [title]="'Completed'" (clicked)="onFilter('completed')" [buttonClass]="filter === 'completed' ? 'active-filter' : ''"></app-button>
   </div>
 </div>
