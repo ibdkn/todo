@@ -1,0 +1,25 @@
+<div>
+  <h3>{{ title }}</h3>
+  <div>
+    <input type="text" [(ngModel)]="taskTitle"/>
+    <app-button [title]="'+'" (clicked)="onCreateTask()"></app-button>
+  </div>
+  @if (tasks.length > 0) {
+    <ul>
+      @for (task of tasks; track task.id) {
+        <li>
+          <input type="checkbox" [checked]="task.isDone"/>
+          <span>{{ task.title }}</span>
+          <app-button [title]="'x'" (clicked)="onDelete(task.id)"></app-button>
+        </li>
+      }
+    </ul>
+    <div>
+      <app-button [title]="'All'" (clicked)="onChangeFilter('all')"></app-button>
+      <app-button [title]="'Active'" (clicked)="onChangeFilter('active')"></app-button>
+      <app-button [title]="'Completed'" (clicked)="onChangeFilter('completed')"></app-button>
+    </div>
+  } @else {
+    <p>Нет тасок</p>
+  }
+</div>
