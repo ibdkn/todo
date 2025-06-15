@@ -14,12 +14,12 @@
         </li>
       }
     </ul>
-    <div>
-      <app-button [title]="'All'" (clicked)="onChangeFilter('all')"></app-button>
-      <app-button [title]="'Active'" (clicked)="onChangeFilter('active')"></app-button>
-      <app-button [title]="'Completed'" (clicked)="onChangeFilter('completed')"></app-button>
-    </div>
   } @else {
     <p>Нет тасок</p>
   }
+  <div>
+    <app-button [title]="'All'" (clicked)="onChangeFilter('all')"></app-button>
+    <app-button [title]="'Active'" (clicked)="onChangeFilter('active')"></app-button>
+    <app-button [title]="'Completed'" (clicked)="onChangeFilter('completed')"></app-button>
+  </div>
 </div>
