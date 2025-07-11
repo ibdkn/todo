@@ -4,4 +4,6 @@ export interface Task {
   isDone: boolean
 }
 
-export type TaskStatus =  'all' | 'active' | 'completed';
+export type TasksState = {
+  [todolistId: string]: Task[]
+}

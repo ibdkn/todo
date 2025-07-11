@@ -1,3 +1,7 @@
 export interface Todolist {
-  title: string
+  id: string,
+  title: string,
+  filter: FilterValues
 }
+
+export type FilterValues =  'all' | 'active' | 'completed';

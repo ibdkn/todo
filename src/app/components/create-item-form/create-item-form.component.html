@@ -1,0 +1,15 @@
+<div>
+  <input type="text"
+         [(ngModel)]="inputValue"
+         (keydown.enter)="onCreate()"
+         (input)="onInput()"
+         [ngClass]="{ 'input-error': inputError }"
+  />
+  <app-button
+    [title]="buttonTitle"
+    (clicked)="onCreate()"
+  ></app-button>
+  @if (inputError) {
+    <div class="input-error-text">{{ inputError }}</div>
+  }
+</div>

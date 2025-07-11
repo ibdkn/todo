@@ -1,61 +1,62 @@
-import {Component, EventEmitter, Input, Output, Signal} from '@angular/core';
-import {Task, TaskStatus} from '../../interfaces/task.interface';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Task} from '../../interfaces/task.interface';
 import {ButtonComponent} from '../button/button.component';
 import {FormsModule} from '@angular/forms';
-import { v4 as uuidv4 } from 'uuid';
 import {NgClass} from '@angular/common';
+import {FilterValues, Todolist} from '../../interfaces/todolist.interface';
+import {CreateItemFormComponent} from '../create-item-form/create-item-form.component';
+import {EditableSpanComponent} from '../editable-span/editable-span.component';
 
 @Component({
   selector: 'app-todolist',
   imports: [
     ButtonComponent,
     FormsModule,
-    NgClass
+    CreateItemFormComponent,
+    EditableSpanComponent
   ],
   templateUrl: './todolist.component.html',
   styleUrl: './todolist.component.scss'
 })
 export class TodolistComponent {
-  @Input() title: string = '';
-  @Input() tasks!: Signal<Task[]>;
-  @Input() filter!: Signal<TaskStatus>;
+  @Input() title!: string;
+  @Input() todolist!: Todolist;
+  @Input() tasks!: Task[];
 
+  @Output() filtered: EventEmitter<FilterValues> = new EventEmitter<FilterValues>();
   @Output() deleted: EventEmitter<string> = new EventEmitter<string>();
-  @Output() filtered: EventEmitter<TaskStatus> = new EventEmitter<TaskStatus>();
-  @Output() created: EventEmitter<Task> = new EventEmitter<Task>();
-  @Output() changed: EventEmitter<Pick<Task, 'id' | 'isDone'>> = new EventEmitter<Pick<Task, 'id' | 'isDone'>>();
+  @Output() created: EventEmitter<string> = new EventEmitter<string>();
+  @Output() statusChanged: EventEmitter<{ taskId: string, isDone: boolean }> = new EventEmitter<{ taskId: string, isDone: boolean }>();
+  @Output() todolistDeleted = new EventEmitter();
+  @Output() taskTitleChanged = new EventEmitter();
+  @Output() todolistTitleChanged = new EventEmitter();
 
-  taskTitle: string = '';
-  inputError: string = '';
-
-  onDelete(taskId: string): void {
+  deleteTaskHandler(taskId: string): void {
     this.deleted.emit(taskId);
   }
 
-  onFilter(status: TaskStatus): void {
-    this.filtered.emit(status);
+  changeFilterHandler(filter: FilterValues) {
+    this.filtered.emit(filter);
   }
 
-  onCreateTask(): void {
-    const id: string = uuidv4();
-    const title: string = this.taskTitle.trim();
-    if (!title) {
-      this.inputError = 'Title is required';
-      return;
-    }
-    this.inputError = '';
-    this.created.emit({id, title, isDone: false});
-    this.taskTitle = '';
+  createTaskHandler(title: string): void {
+    this.created.emit(title);
   }
 
-  onChangeTaskStatus(id: string, e: Event): void {
+  changeTaskStatusHandler(taskId: string, e: Event): void {
     const newTaskStatus: boolean = (e.currentTarget as HTMLInputElement).checked;
-    this.changed.emit({id, isDone: newTaskStatus});
+    this.statusChanged.emit({taskId, isDone: newTaskStatus});
   }
 
-  onInput(): void {
-    if (this.inputError) {
-      this.inputError = '';
-    }
+  deleteTodolistHandler() {
+    this.todolistDeleted.emit()
+  }
+
+  updateTaskTitleHandler(taskId: string, title: string) {
+    this.taskTitleChanged.emit({title, taskId})
+  }
+
+  updateTodolistTitleHandler( title: string) {
+    this.todolistTitleChanged.emit(title)
   }
 }

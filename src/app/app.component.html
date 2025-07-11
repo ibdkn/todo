@@ -1,11 +1,17 @@
 <div class="app">
-  <app-todolist
-    [title]="'What to learn'"
-    [tasks]="filteredTasks"
-    [filter]="currentFilter"
-    (deleted)="deleteTask($event)"
-    (filtered)="changeFilter($event)"
-    (created)="createTask($event)"
-    (changed)="changeTaskStatus($event)"
-  ></app-todolist>
+  <app-create-item-form [buttonTitle]="'+'" (created)="createTodolist($event)"/>
+  @for (todolist of todolists; track todolist.id) {
+    <app-todolist
+      [todolist]="todolist"
+      [title]="todolist.title"
+      [tasks]="getFilteredTasks(tasks[todolist.id], todolist.filter)"
+      (created)="createTask(todolist.id, $event)"
+      (deleted)="deleteTask(todolist.id, $event)"
+      (statusChanged)="changeTaskStatus(todolist.id, $event)"
+      (filtered)="changeFilter(todolist.id, $event)"
+      (todolistDeleted)="deleteTodolist(todolist.id)"
+      (taskTitleChanged)="updateTaskTitle(todolist.id, $event)"
+      (todolistTitleChanged)="updateTodolistTitle(todolist.id, $event)"
+    ></app-todolist>
+  }
 </div>
