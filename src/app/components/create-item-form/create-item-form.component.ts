@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ButtonComponent} from '../button/button.component';
 import {FormsModule} from '@angular/forms';
 import {NgClass} from '@angular/common';
+import {EditableSpanComponent} from '../editable-span/editable-span.component';
 
 
 @Component({
@@ -9,13 +10,14 @@ import {NgClass} from '@angular/common';
   imports: [
     ButtonComponent,
     FormsModule,
-    NgClass
+    NgClass,
   ],
   templateUrl: './create-item-form.component.html',
   styleUrl: './create-item-form.component.scss'
 })
 export class CreateItemFormComponent {
   @Input() buttonTitle!: string;
+  @Input() buttonClass!: string;
   @Output() created = new EventEmitter();
 
   inputValue: string = '';

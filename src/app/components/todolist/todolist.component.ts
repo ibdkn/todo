@@ -13,7 +13,8 @@ import {EditableSpanComponent} from '../editable-span/editable-span.component';
     ButtonComponent,
     FormsModule,
     CreateItemFormComponent,
-    EditableSpanComponent
+    EditableSpanComponent,
+    NgClass
   ],
   templateUrl: './todolist.component.html',
   styleUrl: './todolist.component.scss'

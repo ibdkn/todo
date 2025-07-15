@@ -1,14 +1,18 @@
-<div>
-  <input type="text"
+<div class="create-item-form">
+  <input type="text" class="form-input"
          [(ngModel)]="inputValue"
          (keydown.enter)="onCreate()"
          (input)="onInput()"
          [ngClass]="{ 'input-error': inputError }"
+         placeholder="Title..."
   />
-  <app-button
-    [title]="buttonTitle"
-    (clicked)="onCreate()"
-  ></app-button>
+  <div class="create-btn">
+    <app-button
+      [title]="buttonTitle"
+      [buttonClass]="buttonClass"
+      (clicked)="onCreate()"
+    ></app-button>
+  </div>
   @if (inputError) {
     <div class="input-error-text">{{ inputError }}</div>
   }

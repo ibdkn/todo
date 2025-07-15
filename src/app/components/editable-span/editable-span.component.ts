@@ -1,12 +1,13 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {AutoFocusDirective} from '../../directives/auto-focus.directive';
+import {CreateItemFormComponent} from '../create-item-form/create-item-form.component';
 
 @Component({
   selector: 'app-editable-span',
   imports: [
     FormsModule,
-    AutoFocusDirective
+    AutoFocusDirective,
   ],
   templateUrl: './editable-span.component.html',
   styleUrl: './editable-span.component.scss'

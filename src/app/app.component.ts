@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {TodolistComponent} from './components/todolist/todolist.component';
 import {Task, TasksState} from './interfaces/task.interface';
 import {v4 as uuidv4} from 'uuid';
@@ -12,10 +12,11 @@ import {CreateItemFormComponent} from './components/create-item-form/create-item
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: string = 'todolist';
   todolistId1: string = uuidv4();
   todolistId2: string = uuidv4();
+  themeMode: boolean = false;
 
   todolists: Todolist[] = [
     {id: this.todolistId1, title: 'What to buy', filter: 'all'},
@@ -34,6 +35,28 @@ export class AppComponent {
       {id: uuidv4(), title: 'ReactJS', isDone: false}
     ],
   };
+
+  ngOnInit() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      this.themeMode = true;
+      document.body.classList.add('dark-theme');
+    } else {
+      this.themeMode = false;
+      document.body.classList.remove('dark-theme');
+    }
+  }
+
+  toggleTheme() {
+    this.themeMode = !this.themeMode;
+    if (this.themeMode) {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    }
+  }
 
   getFilteredTasks(tasks: Task[], filter: FilterValues): Task[] {
     if (filter === 'active') return tasks.filter(task => !task.isDone);
