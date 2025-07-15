@@ -1,5 +1,0 @@
-@if (!isEditMode) {
-  <span (dblclick)="turnOnEditMode()">{{ title }}</span>
-} @else {
-  <input [(ngModel)]="currentTitle" [value]="title" (blur)="turnOffEditMode()" appAutoFocus>
-}
