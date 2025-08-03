@@ -16,8 +16,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "@todo/todolist": ["libs/todolist/src/index.ts"],
       "@todo/common-ui": ["libs/common-ui/src/index.ts"],
+      "@todo/todolist": ["libs/todolist/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."
