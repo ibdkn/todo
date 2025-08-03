@@ -48,6 +48,7 @@
         @for (todolist of todolists(); track todolist.id) {
           <app-todolist
             [todolist]="todolist"
+            [tasks]="getFilteredTasks(tasks()[todolist.id] ?? [], todolist.filter)"
             [title]="todolist.title"
             (created)="createTask(todolist.id, $event)"
             (deleted)="deleteTask(todolist.id, $event)"
@@ -58,7 +59,6 @@
             (todolistTitleChanged)="updateTodolistTitle(todolist.id, $event)"
           ></app-todolist>
         }
-        <!--      [tasks]="getFilteredTasks(tasks[todolist.id], todolist.filter)"-->
       } @else {
         <p class="empty-block">No todolists</p>
       }

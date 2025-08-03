@@ -13,7 +13,7 @@ const initialTodolists: Todolist[] = [
 @Injectable({
   providedIn: 'root'
 })
-export class TodolistsEffects {
+export class TodolistEffects {
   // todolistService =
   actions$ = inject(Actions);
 

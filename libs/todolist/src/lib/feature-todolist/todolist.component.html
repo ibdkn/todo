@@ -16,7 +16,7 @@
     (created)="createTaskHandler($event)"
     [buttonClass]="'create-btn'"
   />
-  @if (0) {
+  @if (tasks) {
   <ul class="todolist__items">
     @for (task of tasks; track task.id) {
     <li class="todolist__item" [ngClass]="{ 'is-done': task.isDone }">

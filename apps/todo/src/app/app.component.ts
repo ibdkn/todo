@@ -1,11 +1,10 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
-import {v4 as uuidv4} from 'uuid';
 import {
   CreateItemFormComponent,
-  FilterValues,
+  FilterValues, selectTasks,
   selectTodolists,
-  Task,
-  TasksState, todolistActions,
+  Task, taskActions,
+  todolistActions,
   TodolistComponent
 } from '@todo/todolist';
 import {Store} from "@ngrx/store";
@@ -20,28 +19,14 @@ import {Store} from "@ngrx/store";
 export class AppComponent implements OnInit {
   store: Store = inject(Store);
   title: string = 'todolist';
-  todolistId1: string = uuidv4();
-  todolistId2: string = uuidv4();
   themeMode: boolean = false;
 
   todolists = this.store.selectSignal(selectTodolists);
-
-  tasks: TasksState = {
-    [this.todolistId1]: [
-      {id: uuidv4(), title: 'Apples', isDone: true},
-      {id: uuidv4(), title: 'Bananas', isDone: true},
-      {id: uuidv4(), title: 'Pepper', isDone: false},
-    ],
-    [this.todolistId2]: [
-      {id: uuidv4(), title: 'HTML&CSS', isDone: true},
-      {id: uuidv4(), title: 'JS', isDone: true},
-      {id: uuidv4(), title: 'ReactJS', isDone: false},
-    ],
-  };
+  tasks = this.store.selectSignal(selectTasks);
 
   ngOnInit() {
     this.store.dispatch(todolistActions.loadTodolists());
-    console.log(this.todolists())
+    this.store.dispatch(taskActions.loadTasks());
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -65,48 +50,25 @@ export class AppComponent implements OnInit {
   }
 
   getFilteredTasks(tasks: Task[], filter: FilterValues) {
-    // if (filter === 'active') return tasks.filter((task) => !task.isDone);
-    // if (filter === 'completed') return tasks.filter((task) => task.isDone);
-    // return tasks;
+    if (filter === 'active') return tasks.filter(task => !task.isDone);
+    if (filter === 'completed') return tasks.filter(task => task.isDone);
+    return tasks;
   }
 
   createTask(todolistId: string, title: string): void {
-    // const newTask = { id: uuidv4(), title, isDone: false };
-    // this.tasks = {
-    //   ...this.tasks,
-    //   [todolistId]: [newTask, ...this.tasks[todolistId]],
-    // };
+    this.store.dispatch(taskActions.createTask({todolistId, title}));
   }
 
-  changeTaskStatus(
-    todolistId: string,
-    {taskId, isDone}: { taskId: string; isDone: boolean }
-  ): void {
-    // this.tasks = {
-    //   ...this.tasks,
-    //   [todolistId]: this.tasks[todolistId].map((t) =>
-    //     t.id === taskId ? { ...t, isDone } : t
-    //   ),
-    // };
+  changeTaskStatus(todolistId: string, {taskId, isDone}: { taskId: string; isDone: boolean }): void {
+    this.store.dispatch(taskActions.changeTaskStatus({todolistId, taskId, isDone}));
   }
 
   deleteTask(todolistId: string, taskId: string): void {
-    // this.tasks = {
-    //   ...this.tasks,
-    //   [todolistId]: this.tasks[todolistId].filter((task) => task.id !== taskId),
-    // };
+    this.store.dispatch(taskActions.deleteTask({todolistId, taskId}));
   }
 
-  updateTaskTitle(
-    todolistId: string,
-    {taskId, title}: { taskId: string; title: string }
-  ) {
-    // this.tasks = {
-    //   ...this.tasks,
-    //   [todolistId]: this.tasks[todolistId].map((task) =>
-    //     task.id === taskId ? { ...task, title } : task
-    //   ),
-    // };
+  updateTaskTitle(todolistId: string, {taskId, title}: { taskId: string; title: string }) {
+    this.store.dispatch(taskActions.updateTaskTitle({todolistId, taskId, title}));
   }
 
   deleteTodolist(todolistId: string): void {

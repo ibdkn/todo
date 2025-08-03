@@ -22,12 +22,10 @@ export class TodolistComponent {
     @Input() todolist!: Todolist;
     @Input() tasks!: Task[];
 
-    @Output() filtered: EventEmitter<FilterValues> =
-        new EventEmitter<FilterValues>();
+    @Output() filtered: EventEmitter<FilterValues> = new EventEmitter<FilterValues>();
     @Output() deleted: EventEmitter<string> = new EventEmitter<string>();
     @Output() created: EventEmitter<string> = new EventEmitter<string>();
-    @Output() statusChanged: EventEmitter<{ taskId: string; isDone: boolean }> =
-        new EventEmitter<{ taskId: string; isDone: boolean }>();
+    @Output() statusChanged: EventEmitter<{ taskId: string; isDone: boolean }> = new EventEmitter<{ taskId: string; isDone: boolean }>();
     @Output() todolistDeleted = new EventEmitter();
     @Output() taskTitleChanged = new EventEmitter();
     @Output() todolistTitleChanged = new EventEmitter();
@@ -45,8 +43,7 @@ export class TodolistComponent {
     }
 
     changeTaskStatusHandler(taskId: string, e: Event): void {
-        const newTaskStatus: boolean = (e.currentTarget as HTMLInputElement)
-            .checked;
+        const newTaskStatus: boolean = (e.currentTarget as HTMLInputElement).checked;
         this.statusChanged.emit({taskId, isDone: newTaskStatus});
     }
 

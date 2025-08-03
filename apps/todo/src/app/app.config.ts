@@ -4,7 +4,7 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 import {provideState, provideStore} from '@ngrx/store';
 import {provideEffects} from "@ngrx/effects";
-import {todolistFeature, TodolistsEffects} from "@todo/todolist";
+import {todolistFeature, TodolistEffects, taskFeature, TaskEffects} from "@todo/todolist";
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -13,6 +13,7 @@ export const appConfig: ApplicationConfig = {
         provideStore(),
         provideEffects(),
         provideState(todolistFeature),
-        provideEffects(TodolistsEffects),
+        provideState(taskFeature),
+        provideEffects(TodolistEffects, TaskEffects),
     ],
 };

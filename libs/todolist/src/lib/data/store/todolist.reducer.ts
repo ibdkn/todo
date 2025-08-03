@@ -6,14 +6,14 @@ export interface TodolistState {
   todolists: Todolist[]
 }
 
-export const initialState: TodolistState = {
+export const todolistInitialState: TodolistState = {
   todolists: []
 }
 
 export const todolistFeature = createFeature({
   name: 'todolistFeature',
   reducer: createReducer(
-    initialState,
+    todolistInitialState,
     on(todolistActions.loadTodolists, (state) => {
       return {
         ...state
