@@ -26,7 +26,7 @@ export const taskFeature = createFeature({
         ...state,
         tasks: {
           ...state.tasks,
-          [payload.todolistId]: [payload.task, ...(state.tasks[payload.todolistId])]
+          [payload.todolistId]: [payload.task, ...(state.tasks[payload.todolistId] ?? [])]
         }
       };
     }),

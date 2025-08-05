@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
   }
 
   createTask(todolistId: string, title: string): void {
+    console.log(todolistId)
     this.store.dispatch(taskActions.createTask({todolistId, title}));
   }
 

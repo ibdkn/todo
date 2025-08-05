@@ -48,7 +48,7 @@
         @for (todolist of todolists(); track todolist.id) {
           <app-todolist
             [todolist]="todolist"
-            [tasks]="getFilteredTasks(tasks()[todolist.id] ?? [], todolist.filter)"
+            [tasks]="getFilteredTasks(tasks()[todolist.id], todolist.filter)"
             [title]="todolist.title"
             (created)="createTask(todolist.id, $event)"
             (deleted)="deleteTask(todolist.id, $event)"
