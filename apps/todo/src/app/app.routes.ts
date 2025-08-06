@@ -20,10 +20,10 @@ export const routes: Routes = [
           provideEffects(TodolistEffects, TaskEffects),
         ]
       },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
     ]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   },
 ];

@@ -90,6 +90,10 @@ ul li {
   border-radius: 6px;
   color: var(--primary-text-color);
 
+  &::placeholder {
+    color: var(--secondary-text-color);
+  }
+
   &:focus {
     border-color: transparent;
     outline: 2px solid var(--hover-accent-color);
@@ -217,5 +221,22 @@ ul li {
 @media screen and (max-width: 768px) {
   .container {
     padding: 0 10px;
+  }
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--light-text-color);
+  background-color: var(--accent-color);
+  border: none;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    opacity: .8;
+    transition: 0.2s ease-in-out;
   }
 }
