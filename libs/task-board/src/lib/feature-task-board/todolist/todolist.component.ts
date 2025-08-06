@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgClass} from '@angular/common';
 import {ButtonComponent} from '@todo/common-ui';
-import {CreateItemFormComponent, EditableSpanComponent} from '../components';
-import {FilterValues, Task, Todolist} from '../data';
+import {CreateItemFormComponent, EditableSpanComponent} from '../../components';
+import {FilterValues, Task, Todolist} from '../../data';
 
 @Component({
     selector: 'app-todolist',

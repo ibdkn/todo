@@ -16,8 +16,11 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
+      "@todo/auth": ["libs/auth/src/index.ts"],
       "@todo/common-ui": ["libs/common-ui/src/index.ts"],
-      "@todo/todolist": ["libs/todolist/src/index.ts"]
+      "@todo/login": ["libs/auth/login/src/index.ts"],
+      "@todo/task-board": ["libs/task-board/src/index.ts"],
+      "@todo/layout": ["libs/layout/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."

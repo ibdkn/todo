@@ -1,0 +1,27 @@
+<div class="new-todolist">
+  <app-create-item-form
+    [buttonTitle]="'+'"
+    (created)="createTodolist($event)"
+    [buttonClass]="'create-btn'"
+  />
+</div>
+<div class="todolists">
+  @if (todolists() && todolists().length > 0) {
+    @for (todolist of todolists(); track todolist.id) {
+      <app-todolist
+        [todolist]="todolist"
+        [tasks]="getFilteredTasks(tasks()[todolist.id], todolist.filter)"
+        [title]="todolist.title"
+        (created)="createTask(todolist.id, $event)"
+        (deleted)="deleteTask(todolist.id, $event)"
+        (statusChanged)="changeTaskStatus(todolist.id, $event)"
+        (filtered)="changeFilter(todolist.id, $event)"
+        (todolistDeleted)="deleteTodolist(todolist.id)"
+        (taskTitleChanged)="updateTaskTitle(todolist.id, $event)"
+        (todolistTitleChanged)="updateTodolistTitle(todolist.id, $event)"
+      ></app-todolist>
+    }
+  } @else {
+    <p class="empty-block">No todolists</p>
+  }
+</div>

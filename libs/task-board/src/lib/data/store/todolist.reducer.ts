@@ -1,4 +1,4 @@
-import {Todolist} from '@todo/todolist';
+import {Todolist} from '@todo/task-board';
 import {createFeature, createReducer, on} from '@ngrx/store';
 import {todolistActions} from './todolist.actions';
 
