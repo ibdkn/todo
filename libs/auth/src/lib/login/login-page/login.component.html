@@ -11,7 +11,12 @@
 
     <label class="form-group">
       <span>Password</span>
-      <input type="text" class="form-input" placeholder="Enter your password">
+      <span class="form-password-wrapper">
+        <input type="password" class="form-input" placeholder="Enter your password" [type]="isPasswordVisible() ? 'text' : 'password'">
+        <button type="button" class="common-icon toggle-password" (click)="isPasswordVisible.set(!isPasswordVisible())">
+          <i class="fa" [ngClass]="isPasswordVisible() ? 'fa-eye-slash' : 'fa-eye'"></i>
+        </button>
+      </span>
     </label>
 
     <button class="button form-button">Sign in</button>

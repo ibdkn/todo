@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, signal, WritableSignal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../auth';
 
@@ -10,4 +10,7 @@ import { AuthService } from '../../auth';
 })
 export class LoginComponent {
   authService: AuthService = inject(AuthService);
+
+  // Сигнал для показа/скрытия текста пароля
+  isPasswordVisible: WritableSignal<boolean> = signal<boolean>(false);
 }
