@@ -1,4 +1,4 @@
-<div class="login">
+<div class="login" [formGroup]="form" (ngSubmit)="onSubmit()">
   <form action="" class="form">
     <h2 class="form-title">
       Login
@@ -6,13 +6,14 @@
 
     <label class="form-group">
       <span>Username or email</span>
-      <input type="text" class="form-input" placeholder="Enter your username or email">
+      <input type="text" class="form-input" placeholder="Enter your username or email" formControlName="usernameOrEmail">
     </label>
 
     <label class="form-group">
       <span>Password</span>
       <span class="form-password-wrapper">
-        <input type="password" class="form-input" placeholder="Enter your password" [type]="isPasswordVisible() ? 'text' : 'password'">
+        <input type="password" class="form-input" placeholder="Enter your password" [type]="isPasswordVisible() ? 'text' : 'password'"
+               formControlName="password">
         <button type="button" class="common-icon toggle-password" (click)="isPasswordVisible.set(!isPasswordVisible())">
           <i class="fa" [ngClass]="isPasswordVisible() ? 'fa-eye-slash' : 'fa-eye'"></i>
         </button>

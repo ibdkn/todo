@@ -20,12 +20,15 @@
     "@ngrx/effects": "^19.2.1",
     "@ngrx/store": "^19.2.1",
     "font-awesome": "^4.7.0",
+    "ngx-cookie-service": "^19.1.2",
+    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uuid": "^11.1.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular/animations": "^19.2.6",
     "@angular-devkit/build-angular": "^19.2.8",
     "@angular-devkit/core": "^19.2.8",
     "@angular-devkit/schematics": "^19.2.8",
