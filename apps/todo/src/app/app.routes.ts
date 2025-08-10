@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {LoginComponent} from '@todo/auth';
+import {canActivateAuth, LoginComponent} from '@todo/auth';
 import {LayoutComponent} from '@todo/layout';
 import {provideState} from '@ngrx/store';
 import {provideEffects} from '@ngrx/effects';
@@ -18,7 +18,8 @@ export const routes: Routes = [
           provideState(todolistFeature),
           provideState(taskFeature),
           provideEffects(TodolistEffects, TaskEffects),
-        ]
+        ],
+        canActivate: [canActivateAuth],
       },
       {
         path: 'login',

@@ -1,8 +1,8 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {taskActions, todolistActions} from '@todo/task-board';
-import {switchMap} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, effect, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {firstValueFrom} from 'rxjs';
+import {Router} from '@angular/router';
+import {AuthService, User} from '@todo/auth';
 
 @Component({
   selector: 'lib-header',
@@ -12,14 +12,18 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   router: Router = inject(Router);
+  authService: AuthService = inject(AuthService);
 
-  isLoginPage = signal(false);
+  isLoginPage: WritableSignal<boolean> = signal(false);
+  me: WritableSignal<User | null> = this.authService.me;
 
   themeMode: boolean = false;
 
   ngOnInit() {
     // определяем, что это страница логина
     this.isLoginPage.set(this.router.url === '/login');
+
+    firstValueFrom(this.authService.getMe());
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
