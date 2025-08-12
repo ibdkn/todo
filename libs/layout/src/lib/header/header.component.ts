@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {firstValueFrom} from 'rxjs';
 import {Router} from '@angular/router';
 import {AuthService, User} from '@todo/auth';
+import {GlobalStoreService} from '@todo/shared';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'lib-header',
@@ -13,17 +15,21 @@ import {AuthService, User} from '@todo/auth';
 export class HeaderComponent implements OnInit {
   router: Router = inject(Router);
   authService: AuthService = inject(AuthService);
+  #globalStoreService: GlobalStoreService = inject(GlobalStoreService);
+  toastr: ToastrService = inject(ToastrService);
 
   isLoginPage: WritableSignal<boolean> = signal(false);
-  me: WritableSignal<User | null> = this.authService.me;
 
   themeMode: boolean = false;
 
-  ngOnInit() {
+  async ngOnInit() {
     // определяем, что это страница логина
     this.isLoginPage.set(this.router.url === '/login');
 
-    firstValueFrom(this.authService.getMe());
+    // получаем данные пользователя
+    if (this.authService.token) {
+      await firstValueFrom(this.authService.getMe());
+    }
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -33,6 +39,15 @@ export class HeaderComponent implements OnInit {
       this.themeMode = false;
       document.body.classList.remove('dark-theme');
     }
+  }
+
+  get user(): User | null {
+    return this.#globalStoreService.me();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.toastr.success('You are logged out successfully!');
   }
 
   toggleTheme() {

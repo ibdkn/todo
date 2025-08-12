@@ -33,7 +33,8 @@ export class AuthService {
   login(payload: Login): Observable<TokenResponse> {
     return this.http
       .post<TokenResponse>(`${this.baseApiUrl}/login`, payload)
-      .pipe(tap((val: TokenResponse): void => this.saveTokens(val)));
+      .pipe(tap((val: TokenResponse): void => this.saveTokens(val)))
+      .pipe(tap(() => {this.getMe().subscribe()}));
   }
 
   getMe(): Observable<User> {
@@ -63,6 +64,8 @@ export class AuthService {
     this.cookieService.deleteAll();
     this.token = null;
     this.refreshToken = null;
+    this.me.set(null);
+    this.#globalStoreService.me.set(null);
     this.router.navigate(['/login']);
   }
 

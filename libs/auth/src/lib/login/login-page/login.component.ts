@@ -25,7 +25,7 @@ export class LoginComponent {
     password: new FormControl<string>('', {nonNullable: true, validators: Validators.required,}),
   });
 
-  onSubmit(): void {
+  login(): void {
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe((val) => {
         this.router.navigate(['/']);

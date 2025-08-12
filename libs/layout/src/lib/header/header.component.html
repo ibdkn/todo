@@ -4,19 +4,20 @@
       <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
     <div class="header__actions">
-      @if (!isLoginPage()) {
+      @if (user) {
         <div class="user">
           <div class="common-icon">
             <i class="fa fa-user" aria-hidden="true"></i>
           </div>
-          <div class="user__name">Isabella Goth</div>
+          <div class="user__name">{{ user.firstName }} {{ user.lastName }}</div>
         </div>
-        <div class="common-icon">
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
+        <div class="common-icon" (click)="logout()">
+          <i class="fa fa-sign-out" aria-hidden="true"></i>
         </div>
-        <!--      <div class="common-icon">-->
-          <!--        <i class="fa fa-sign-out" aria-hidden="true"></i>-->
-          <!--      </div>-->
+      } @else {
+<!--        <div class="common-icon">-->
+<!--          <i class="fa fa-sign-in" aria-hidden="true"></i>-->
+<!--        </div>-->
       }
       <div class="theme-toggle">
         <div class="common-icon" (click)="toggleTheme()">
