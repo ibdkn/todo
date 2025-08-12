@@ -26,7 +26,7 @@
   --accent-color: #5368d5;
   --hover-accent-color: rgba(83, 104, 213, 0.3);
   // tasks
-  --task-status-color: #7fb579;
+  --success-color: #7fb579;
   --error-color: #ca5d5d;
 }
 
@@ -52,7 +52,7 @@ body.dark-theme {
   --accent-color: #2663eb;
   --hover-accent-color: rgba(38, 99, 235, 0.3);
   // tasks
-  --task-status-color: #567c52;
+  --success-color: #567c52;
   --error-color: #ca5d5d;
 }
 
@@ -149,7 +149,7 @@ ul li {
     top: 0;
     position: absolute;
     transition: transform var(--d-t, 0.3s) var(--d-t-e, ease),
-      opacity var(--d-o, 0.2s);
+    opacity var(--d-o, 0.2s);
   }
   .checkbox-wrapper input[type='checkbox']:checked {
     --b: var(--active);
@@ -213,6 +213,7 @@ ul li {
 .checkbox-wrapper * {
   box-sizing: inherit;
 }
+
 .checkbox-wrapper *:before,
 .checkbox-wrapper *:after {
   box-sizing: inherit;
@@ -243,13 +244,22 @@ ul li {
 
 // toast styles
 .toast-success {
-  background-color: var(--accent-color) !important;
+  background-color: var(--success-color) !important;
+}
+
+.toast-error {
+  background-color: var(--error-color) !important;
 }
 
 .toast-container .ngx-toastr {
   margin: 0 0 40px;
 }
 
-.toast-message {
+.toast-title {
   font-size: 14px;
 }
+
+.toast-message {
+  font-size: 12px;
+}
+

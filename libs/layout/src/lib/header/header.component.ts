@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {firstValueFrom} from 'rxjs';
 import {Router} from '@angular/router';
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   themeMode: boolean = false;
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     // определяем, что это страница логина
     this.isLoginPage.set(this.router.url === '/login');
 
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
       await firstValueFrom(this.authService.getMe());
     }
 
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme: string | null = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       this.themeMode = true;
       document.body.classList.add('dark-theme');
@@ -45,12 +45,12 @@ export class HeaderComponent implements OnInit {
     return this.#globalStoreService.me();
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
-    this.toastr.success('You are logged out successfully!');
+    this.toastr.success('You have been logged out successfully', 'Logout successful');
   }
 
-  toggleTheme() {
+  toggleTheme(): void {
     this.themeMode = !this.themeMode;
     if (this.themeMode) {
       document.body.classList.add('dark-theme');

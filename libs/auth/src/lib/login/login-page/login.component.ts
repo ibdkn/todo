@@ -27,9 +27,18 @@ export class LoginComponent {
 
   login(): void {
     if (this.form.valid) {
-      this.authService.login(this.form.value).subscribe((val) => {
-        this.router.navigate(['/']);
-        this.toastr.success('You are signed in successfully!');
+      this.authService.login(this.form.value).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+          this.toastr.success('You have signed in successfully', 'Login successful');
+        },
+        error: (err) => {
+          if (err.status === 401) {
+            this.toastr.error('Invalid username or password', 'Login failed');
+          } else {
+            this.toastr.error('An unexpected error occurred', 'Error');
+          }
+        }
       });
     }
   }

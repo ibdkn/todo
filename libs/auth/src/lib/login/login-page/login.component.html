@@ -1,5 +1,5 @@
 <div class="login" [formGroup]="form" (ngSubmit)="login()">
-  <form action="" class="form">
+  <form action="" class="form" novalidate>
     <h2 class="form-title">
       Login
     </h2>
@@ -20,6 +20,6 @@
       </span>
     </label>
 
-    <button class="button form-button">Sign in</button>
+    <button class="button form-button" [disabled]="form.invalid">Sign in</button>
   </form>
 </div>

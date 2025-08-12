@@ -24,6 +24,7 @@
 }
 
 .form-group {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -49,4 +50,10 @@
   right: 6px;
   transform: translateY(-50%);
   border: none;
+}
+
+// validation
+.form-button[disabled] {
+  opacity: .6;
+  cursor: not-allowed;
 }
