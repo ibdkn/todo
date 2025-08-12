@@ -1,19 +1,20 @@
-<div class="login" [formGroup]="form" (ngSubmit)="login()">
-  <form action="" class="form" novalidate>
+<div class="login">
+  <form action="" class="form" [formGroup]="form" (ngSubmit)="login()" autocomplete="on">
     <h2 class="form-title">
       Login
     </h2>
 
     <label class="form-group">
       <span>Username or email</span>
-      <input type="text" class="form-input" placeholder="Enter your username or email" formControlName="usernameOrEmail">
+      <input type="text" class="form-input" name="username" autocomplete="username" placeholder="Enter your username or email"
+             formControlName="usernameOrEmail">
     </label>
 
     <label class="form-group">
       <span>Password</span>
       <span class="form-password-wrapper">
-        <input type="password" class="form-input" placeholder="Enter your password" [type]="isPasswordVisible() ? 'text' : 'password'"
-               formControlName="password">
+        <input type="password" class="form-input" name="password" autocomplete="current-password" placeholder="Enter your password"
+               [type]="isPasswordVisible() ? 'text' : 'password'" formControlName="password">
         <button type="button" class="common-icon toggle-password" (click)="isPasswordVisible.set(!isPasswordVisible())">
           <i class="fa" [ngClass]="isPasswordVisible() ? 'fa-eye-slash' : 'fa-eye'"></i>
         </button>
