@@ -21,7 +21,6 @@ export class BoardComponent implements OnInit {
   tasks = this.store.selectSignal(selectTasks);
 
   ngOnInit() {
-    console.log('BoardComponent loaded');
     this.store.dispatch(todolistActions.loadTodolists());
     this.store.dispatch(taskActions.loadTasks());
   }
@@ -32,24 +31,24 @@ export class BoardComponent implements OnInit {
     return tasks;
   }
 
-  createTask(todolistId: string, title: string): void {
+  createTask(todolistId: number, title: string): void {
     console.log(todolistId)
     this.store.dispatch(taskActions.createTask({todolistId, title}));
   }
 
-  changeTaskStatus(todolistId: string, {taskId, isDone}: { taskId: string; isDone: boolean }): void {
+  changeTaskStatus(todolistId: number, {taskId, isDone}: { taskId: string; isDone: boolean }): void {
     this.store.dispatch(taskActions.changeTaskStatus({todolistId, taskId, isDone}));
   }
 
-  deleteTask(todolistId: string, taskId: string): void {
+  deleteTask(todolistId: number, taskId: string): void {
     this.store.dispatch(taskActions.deleteTask({todolistId, taskId}));
   }
 
-  updateTaskTitle(todolistId: string, {taskId, title}: { taskId: string; title: string }) {
+  updateTaskTitle(todolistId: number, {taskId, title}: { taskId: string; title: string }) {
     this.store.dispatch(taskActions.updateTaskTitle({todolistId, taskId, title}));
   }
 
-  deleteTodolist(todolistId: string): void {
+  deleteTodolist(todolistId: number): void {
     this.store.dispatch(todolistActions.deleteTodolist({todolistId}))
   }
 
@@ -57,11 +56,11 @@ export class BoardComponent implements OnInit {
     this.store.dispatch(todolistActions.createTodolist({title}))
   }
 
-  updateTodolistTitle(todolistId: string, title: string): void {
+  updateTodolistTitle(todolistId: number, title: string): void {
     this.store.dispatch(todolistActions.updateTodolist({todolistId, title}))
   }
 
-  changeFilter(todolistId: string, filter: FilterValues) {
+  changeFilter(todolistId: number, filter: FilterValues) {
     this.store.dispatch(todolistActions.filterTodolist({todolistId, filter}))
   }
 }

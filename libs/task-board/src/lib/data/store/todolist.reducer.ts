@@ -22,7 +22,10 @@ export const todolistFeature = createFeature({
     on(todolistActions.todolistsLoaded, (state, payload) => {
       return {
         ...state,
-        todolists: payload.todolists
+        todolists: payload.todolists.map(tl => ({
+          ...tl,
+          filter: 'all' as const
+        }))
       }
     }),
     on(todolistActions.todolistDeleted, (state, payload) => {
@@ -40,7 +43,7 @@ export const todolistFeature = createFeature({
     on(todolistActions.todolistUpdated, (state, payload) => {
       return {
         ...state,
-        todolists: state.todolists.map(tl => tl.id === payload.todolistId ? { ...tl, title: payload.title } : tl)
+        todolists: state.todolists.map(tl => tl.id === payload.todolist.id ? { ...tl, title: payload.todolist.title } : tl)
       }
     }),
     on(todolistActions.todolistFiltered, (state, payload) => {

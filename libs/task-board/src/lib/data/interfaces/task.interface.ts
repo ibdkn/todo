@@ -5,5 +5,5 @@ export interface Task {
 }
 
 export type TasksState = {
-  [todolistId: string]: Task[];
+  [todolistId: number]: Task[];
 };

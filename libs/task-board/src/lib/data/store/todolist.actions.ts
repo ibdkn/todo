@@ -6,13 +6,13 @@ export const todolistActions = createActionGroup({
   events: {
     'load todolists': emptyProps(),
     'todolists loaded': props<{ todolists: Todolist[] }>(),
-    'delete todolist': props<{ todolistId: string }>(),
-    'todolist deleted': props<{ todolistId: string }>(),
+    'delete todolist': props<{ todolistId: number }>(),
+    'todolist deleted': props<{ todolistId: number }>(),
     'create todolist': props<{ title: string }>(),
     'todolist created': props<{ todolist: Todolist }>(),
-    'update todolist': props<{ todolistId: string, title: string }>(),
-    'todolist updated': props<{ todolistId: string, title: string }>(),
-    'filter todolist': props<{ todolistId: string, filter: FilterValues }>(),
-    'todolist filtered': props<{ todolistId: string, filter: FilterValues }>(),
+    'update todolist': props<{ todolistId: number, title: string }>(),
+    'todolist updated': props<{ todolist: Todolist }>(),
+    'filter todolist': props<{ todolistId: number, filter: FilterValues }>(),
+    'todolist filtered': props<{ todolistId: number; filter: FilterValues }>()
   }
 })

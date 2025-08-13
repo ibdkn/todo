@@ -6,12 +6,12 @@ import {Task, TasksState} from '../interfaces/task.interface';
 import {v4 as uuidv4} from 'uuid';
 
 const initialTasks: TasksState = {
-  ['todolist-1']: [
+  [1]: [
     {id: uuidv4(), title: 'Apples', isDone: true},
     {id: uuidv4(), title: 'Bananas', isDone: true},
     {id: uuidv4(), title: 'Pepper', isDone: false},
   ],
-  ['todolist-2']: [
+  [2]: [
     {id: uuidv4(), title: 'HTML&CSS', isDone: true},
     {id: uuidv4(), title: 'JS', isDone: true},
     {id: uuidv4(), title: 'ReactJS', isDone: false},
