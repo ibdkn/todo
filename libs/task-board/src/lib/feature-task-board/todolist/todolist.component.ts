@@ -23,18 +23,18 @@ export class TodolistComponent {
     @Input() tasks!: Task[];
 
     @Output() filtered: EventEmitter<FilterValues> = new EventEmitter<FilterValues>();
-    @Output() deleted: EventEmitter<string> = new EventEmitter<string>();
+    @Output() deleted: EventEmitter<number> = new EventEmitter<number>();
     @Output() created: EventEmitter<string> = new EventEmitter<string>();
-    @Output() statusChanged: EventEmitter<{ taskId: string; isDone: boolean }> = new EventEmitter<{ taskId: string; isDone: boolean }>();
+    @Output() statusChanged: EventEmitter<{ taskId: number; isDone: boolean }> = new EventEmitter<{ taskId: number; isDone: boolean }>();
     @Output() todolistDeleted = new EventEmitter();
     @Output() taskTitleChanged = new EventEmitter();
     @Output() todolistTitleChanged = new EventEmitter();
 
-    deleteTaskHandler(taskId: string): void {
+    deleteTaskHandler(taskId: number): void {
         this.deleted.emit(taskId);
     }
 
-    changeFilterHandler(filter: FilterValues) {
+    changeFilterHandler(filter: FilterValues): void {
         this.filtered.emit(filter);
     }
 
@@ -42,20 +42,20 @@ export class TodolistComponent {
         this.created.emit(title);
     }
 
-    changeTaskStatusHandler(taskId: string, e: Event): void {
+    changeTaskStatusHandler(taskId: number, e: Event): void {
         const newTaskStatus: boolean = (e.currentTarget as HTMLInputElement).checked;
         this.statusChanged.emit({taskId, isDone: newTaskStatus});
     }
 
-    deleteTodolistHandler() {
+    deleteTodolistHandler(): void {
         this.todolistDeleted.emit();
     }
 
-    updateTaskTitleHandler(taskId: string, title: string) {
+    updateTaskTitleHandler(taskId: number, title: string): void {
         this.taskTitleChanged.emit({title, taskId});
     }
 
-    updateTodolistTitleHandler(title: string) {
+    updateTodolistTitleHandler(title: string): void {
         this.todolistTitleChanged.emit(title);
     }
 }

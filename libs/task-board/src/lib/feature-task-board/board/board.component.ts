@@ -36,15 +36,15 @@ export class BoardComponent implements OnInit {
     this.store.dispatch(taskActions.createTask({todolistId, title}));
   }
 
-  changeTaskStatus(todolistId: number, {taskId, isDone}: { taskId: string; isDone: boolean }): void {
+  changeTaskStatus(todolistId: number, {taskId, isDone}: { taskId: number; isDone: boolean }): void {
     this.store.dispatch(taskActions.changeTaskStatus({todolistId, taskId, isDone}));
   }
 
-  deleteTask(todolistId: number, taskId: string): void {
+  deleteTask(todolistId: number, taskId: number): void {
     this.store.dispatch(taskActions.deleteTask({todolistId, taskId}));
   }
 
-  updateTaskTitle(todolistId: number, {taskId, title}: { taskId: string; title: string }) {
+  updateTaskTitle(todolistId: number, {taskId, title}: { taskId: number; title: string }) {
     this.store.dispatch(taskActions.updateTaskTitle({todolistId, taskId, title}));
   }
 

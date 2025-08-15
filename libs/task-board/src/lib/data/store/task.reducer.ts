@@ -17,10 +17,17 @@ export const taskFeature = createFeature({
     on(taskActions.loadTasks, (state) => ({
       ...state
     })),
-    on(taskActions.tasksLoaded, (state, payload) => ({
-      ...state,
-      tasks: payload.tasks
-    })),
+    on(taskActions.tasksLoaded, (state, { tasks }) => {
+      const grouped = tasks.reduce((acc, t) => {
+        (acc[t.todolistId] ??= []).push(t);
+        return acc;
+      }, {} as TasksState);
+
+      return {
+        ...state,
+        tasks: grouped
+      };
+    }),
     on(taskActions.taskCreated, (state, payload) => {
       return {
         ...state,
