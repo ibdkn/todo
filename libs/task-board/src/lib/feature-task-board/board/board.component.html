@@ -16,12 +16,15 @@
         (deleted)="deleteTask(todolist.id, $event)"
         (statusChanged)="changeTaskStatus(todolist.id, $event)"
         (filtered)="changeFilter(todolist.id, $event)"
-        (todolistDeleted)="deleteTodolist(todolist.id)"
         (taskTitleChanged)="updateTaskTitle(todolist.id, $event)"
         (todolistTitleChanged)="updateTodolistTitle(todolist.id, $event)"
+        (confirmDialogOpened)="openConfirmDialog(todolist.id)"
       ></app-todolist>
     }
   } @else {
     <p class="empty-block">No todolists</p>
   }
 </div>
+@if (isConfirmDialogOpen) {
+  <app-confirm-dialog (closed)="handleDialogClosed($event)"/>
+}

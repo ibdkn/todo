@@ -20,8 +20,8 @@
       "@todo/common-ui": ["libs/common-ui/src/index.ts"],
       "@todo/layout": ["libs/layout/src/index.ts"],
       "@todo/login": ["libs/auth/login/src/index.ts"],
-      "@todo/task-board": ["libs/task-board/src/index.ts"],
-      "@todo/shared": ["libs/shared/src/index.ts"]
+      "@todo/shared": ["libs/shared/src/index.ts"],
+      "@todo/task-board": ["libs/task-board/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."

@@ -1,0 +1,14 @@
+<div class="confirm-dialog" (click)="closeDialog(false)">
+  <div class="wrapper" (click)="$event.stopPropagation()">
+    <div class="confirm-dialog__cross" (click)="closeDialog(false)">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <h3 class="confirm-dialog__title">Are you sure you want to delete this item?</h3>
+    <p class="confirm-dialog__description">All related tasks will be deleted along with the todolist</p>
+
+    <div class="confirm-dialog__action">
+      <app-button [title]="'Cancel'" [buttonClass]="'cancel'" (click)="closeDialog(false)"/>
+      <app-button [title]="'Delete'" [buttonClass]="'delete'" (click)="closeDialog(true)"/>
+    </div>
+  </div>
+</div>

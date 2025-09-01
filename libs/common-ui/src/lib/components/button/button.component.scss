@@ -41,6 +41,32 @@ button {
   border: 1px solid var(--button-border-color);
   transition: 0.2s ease-in-out;
 
+  &.delete {
+    color: var(--light-text-color);
+    background-color: var(--error-color);
+    border-color: var(--error-color);
+
+    &:hover {
+      color: var(--light-text-color);
+      background-color: var(--error-color);
+      opacity: .8;
+      transition: 0.2s ease-in-out;
+    }
+  }
+
+  &.cancel {
+    color: var(--light-text-color);
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+
+    &:hover {
+      color: var(--light-text-color);
+      background-color: var(--success-color);
+      opacity: .8;
+      transition: 0.2s ease-in-out;
+    }
+  }
+
   &:hover {
     color: var(--light-text-color);
     background-color: var(--accent-color);

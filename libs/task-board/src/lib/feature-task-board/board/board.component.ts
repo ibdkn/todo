@@ -6,11 +6,12 @@ import {Store} from '@ngrx/store';
 import {selectTasks, selectTodolists, taskActions, todolistActions} from '../../data/store';
 import { Task } from '../../data/interfaces/task.interface';
 import { FilterValues } from '../../data/interfaces/todolist.interface';
+import { ConfirmDialogComponent } from '@todo/common-ui';
 
 
 @Component({
   selector: 'lib-board',
-  imports: [CommonModule, CreateItemFormComponent, TodolistComponent],
+  imports: [CommonModule, CreateItemFormComponent, TodolistComponent, ConfirmDialogComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -20,9 +21,25 @@ export class BoardComponent implements OnInit {
   todolists = this.store.selectSignal(selectTodolists);
   tasks = this.store.selectSignal(selectTasks);
 
+  isConfirmDialogOpen = false;
+  openedTodolistId: null | number = null;
+
   ngOnInit() {
     this.store.dispatch(todolistActions.loadTodolists());
     this.store.dispatch(taskActions.loadTasks());
+  }
+
+  openConfirmDialog(todolistId: number) {
+    this.isConfirmDialogOpen = true;
+    this.openedTodolistId = todolistId;
+  }
+
+  handleDialogClosed(result: boolean) {
+    this.isConfirmDialogOpen = false;
+    if (result && this.openedTodolistId) {
+      this.store.dispatch(todolistActions.deleteTodolist({ todolistId: this.openedTodolistId }));
+      this.openedTodolistId = null;
+    }
   }
 
   getFilteredTasks(tasks: Task[], filter: FilterValues) {
@@ -48,9 +65,10 @@ export class BoardComponent implements OnInit {
     this.store.dispatch(taskActions.updateTaskTitle({todolistId, taskId, title}));
   }
 
-  deleteTodolist(todolistId: number): void {
-    this.store.dispatch(todolistActions.deleteTodolist({todolistId}))
-  }
+  // TODO пока не используется, удаление через попап
+  // deleteTodolist(todolistId: number): void {
+  //   this.store.dispatch(todolistActions.deleteTodolist({todolistId}))
+  // }
 
   createTodolist(title: string): void {
     this.store.dispatch(todolistActions.createTodolist({title}))
