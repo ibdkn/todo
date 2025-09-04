@@ -3,12 +3,12 @@
   flex-direction: column;
   gap: 30px;
   height: 100%;
-}
 
-.board-content {
-  position: relative;
-  padding: 0 15px;
-  flex-grow: 1;
+  &__content {
+    position: relative;
+    padding: 0 15px;
+    flex-grow: 1;
+  }
 }
 
 .todolists {
@@ -25,11 +25,11 @@
   scrollbar-color: rgba(255, 255, 255, 0.4) rgba(0, 0, 0, 0.1490196078);
   scrollbar-width: auto;
   gap: 10px;
-}
 
-.empty-block {
-  font-size: 14px;
-  color: var(--secondary-text-color);
+  .new-todolist {
+    padding-top: 2px; // todo временно, потом заменить на кнопку, при клике на которую появляется инпут
+    width: 300px;
+  }
 }
 
 @media screen and (max-width: 1024px) {

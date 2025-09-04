@@ -1,5 +1,5 @@
 <div class="todolist">
-  <div class="wrapper">
+  <div class="todolist__header">
     <h3 class="todolist__title">
       <app-editable-span
         [title]="title"
@@ -11,11 +11,6 @@
       [buttonClass]="'delete-btn'"
     ></app-button>
   </div>
-  <app-create-item-form
-    [buttonTitle]="'+'"
-    (created)="createTaskHandler($event)"
-    [buttonClass]="'create-btn'"
-  />
   @if (tasks) {
   <ul class="todolist__items">
     @for (task of tasks; track task.id) {
@@ -41,24 +36,31 @@
     </li>
     }
   </ul>
-  } @else {
-  <p class="todolist__text">No tasks</p>
   }
-  <div class="todolist__actions">
-    <app-button
-      [title]="'All'"
-      (clicked)="changeFilterHandler('all')"
-      [buttonClass]="todolist.filter === 'all' ? 'active' : ''"
-    ></app-button>
-    <app-button
-      [title]="'Active'"
-      (clicked)="changeFilterHandler('active')"
-      [buttonClass]="todolist.filter === 'active' ? 'active' : ''"
-    ></app-button>
-    <app-button
-      [title]="'Completed'"
-      (clicked)="changeFilterHandler('completed')"
-      [buttonClass]="todolist.filter === 'completed' ? 'active' : ''"
-    ></app-button>
+  <div class="todolist__form">
+    <app-create-item-form
+      [buttonTitle]="'+'"
+      (created)="createTaskHandler($event)"
+      [buttonClass]="'create-btn'"
+    />
   </div>
+<!-- todo пока не используется, подумать как лучше сделать фильтрацию -->
+
+<!--  <div class="todolist__actions">-->
+<!--    <app-button-->
+<!--      [title]="'All'"-->
+<!--      (clicked)="changeFilterHandler('all')"-->
+<!--      [buttonClass]="todolist.filter === 'all' ? 'active' : ''"-->
+<!--    ></app-button>-->
+<!--    <app-button-->
+<!--      [title]="'Active'"-->
+<!--      (clicked)="changeFilterHandler('active')"-->
+<!--      [buttonClass]="todolist.filter === 'active' ? 'active' : ''"-->
+<!--    ></app-button>-->
+<!--    <app-button-->
+<!--      [title]="'Completed'"-->
+<!--      (clicked)="changeFilterHandler('completed')"-->
+<!--      [buttonClass]="todolist.filter === 'completed' ? 'active' : ''"-->
+<!--    ></app-button>-->
+<!--  </div>-->
 </div>

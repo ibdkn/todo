@@ -1,12 +1,5 @@
 <div class="board">
-  <div class="new-todolist">
-    <app-create-item-form
-      [buttonTitle]="'+'"
-      (created)="createTodolist($event)"
-      [buttonClass]="'create-btn'"
-    />
-  </div>
-  <div class="board-content">
+  <div class="board__content">
     <div class="todolists">
       @if (todolists() && todolists().length > 0) {
         @for (todolist of todolists(); track todolist.id) {
@@ -23,12 +16,17 @@
             (confirmDialogOpened)="openConfirmDialog(todolist.id)"
           ></app-todolist>
         }
-      } @else {
-        <p class="empty-block">No todolists</p>
       }
+      <div class="new-todolist">
+        <app-create-item-form
+          [buttonTitle]="'+'"
+          (created)="createTodolist($event)"
+          [buttonClass]="'create-btn'"
+        />
+      </div>
     </div>
   </div>
-  @if (isConfirmDialogOpen) {
-    <app-confirm-dialog (closed)="handleDialogClosed($event)"/>
-  }
 </div>
+@if (isConfirmDialogOpen) {
+  <app-confirm-dialog (closed)="handleDialogClosed($event)"/>
+}

@@ -46,6 +46,7 @@ export class AuthService {
       }));
   }
 
+  // TODO пофиксить запрос на рефреш, уходит ""
   refreshAuthToken() {
     return this.http
       .post<TokenResponse>(`${this.baseApiUrl}/refresh`, {
