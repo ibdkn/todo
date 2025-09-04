@@ -1,17 +1,30 @@
-:host {
+.board {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  height: 100%;
+}
+
+.board-content {
+  position: relative;
+  padding: 0 15px;
+  flex-grow: 1;
 }
 
 .todolists {
+  padding: 0;
   position: absolute;
-  top: 160px;
-  left: 15px;
-  right: 15px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   display: flex;
-  gap: 14px;
-  overflow: auto hidden;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-color: rgba(255, 255, 255, 0.4) rgba(0, 0, 0, 0.1490196078);
+  scrollbar-width: auto;
+  gap: 10px;
 }
 
 .empty-block {

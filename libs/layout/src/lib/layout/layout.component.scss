@@ -1,5 +1,10 @@
 .main {
+  position: relative;
   padding: 30px 0;
   height: calc(100vh - 60px);
   background-color: var(--primary-bg-color);
+
+  .container {
+    height: 100%;
+  }
 }
