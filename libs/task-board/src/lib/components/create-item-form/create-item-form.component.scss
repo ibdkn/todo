@@ -1,11 +1,15 @@
 .create-item-form {
+  height: 50px;
   position: relative;
+  padding: 8px 16px;
   max-width: 300px;
   width: 100%;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   gap: 8px;
+  background-color: var(--todolist-bg-color);
+  border-radius: 8px;
 }
 
 .input-error {

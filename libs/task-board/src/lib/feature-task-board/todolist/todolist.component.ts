@@ -4,16 +4,17 @@ import {NgClass} from '@angular/common';
 import {ButtonComponent, ConfirmDialogComponent} from '@todo/common-ui';
 import {CreateItemFormComponent, EditableSpanComponent} from '../../components';
 import {FilterValues, Task, Todolist} from '../../data';
+import {CreateItemComponent} from "../../components/create-item/create-item.component";
 
 @Component({
   selector: 'app-todolist',
-  imports: [
-    ButtonComponent,
-    FormsModule,
-    CreateItemFormComponent,
-    EditableSpanComponent,
-    NgClass,
-  ],
+    imports: [
+        ButtonComponent,
+        FormsModule,
+        EditableSpanComponent,
+        NgClass,
+        CreateItemComponent,
+    ],
   templateUrl: './todolist.component.html',
   styleUrl: './todolist.component.scss',
 })

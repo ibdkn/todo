@@ -34,6 +34,10 @@
 button {
   width: 100%;
   padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   border-radius: 4px;
   cursor: pointer;
   color: var(--button-text-color);
@@ -77,4 +81,20 @@ button {
 .active {
   color: var(--light-text-color);
   background-color: var(--accent-color);
+}
+
+.add-new-item {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 14px;
+  color: var(--secondary-text-color);
+  background-color: var(--todolist-bg-color);
+  border-radius: 8px;
+  border: none;
+
+  &:hover {
+    color: var(--secondary-text-color);
+    background-color: var(--todolist-bg-color);
+    opacity: .8;
+  }
 }

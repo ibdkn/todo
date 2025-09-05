@@ -6,10 +6,7 @@
         (titleChanged)="updateTodolistTitleHandler($event)"
       ></app-editable-span>
     </h3>
-    <app-button
-      (clicked)="openConfirmDialog()"
-      [buttonClass]="'delete-btn'"
-    ></app-button>
+    <app-button (clicked)="openConfirmDialog()" [icon]="'trash'" [buttonClass]="'delete-btn'"></app-button>
   </div>
   @if (tasks) {
   <ul class="todolist__items">
@@ -28,21 +25,14 @@
         (titleChanged)="updateTaskTitleHandler(task.id, $event)"
       />
       <div class="btn">
-        <app-button
-          (clicked)="deleteTaskHandler(task.id)"
-          [buttonClass]="'delete-btn'"
-        ></app-button>
+        <app-button (clicked)="deleteTaskHandler(task.id)" [icon]="'trash'" [buttonClass]="'delete-btn'"></app-button>
       </div>
     </li>
     }
   </ul>
   }
   <div class="todolist__form">
-    <app-create-item-form
-      [buttonTitle]="'+'"
-      (created)="createTaskHandler($event)"
-      [buttonClass]="'create-btn'"
-    />
+    <lib-create-item [buttonTitle]="'+'" (created)="createTaskHandler($event)" [buttonClass]="'create-btn'"/>
   </div>
 <!-- todo пока не используется, подумать как лучше сделать фильтрацию -->
 

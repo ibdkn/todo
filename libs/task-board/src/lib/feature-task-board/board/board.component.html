@@ -18,11 +18,7 @@
         }
       }
       <div class="new-todolist">
-        <app-create-item-form
-          [buttonTitle]="'+'"
-          (created)="createTodolist($event)"
-          [buttonClass]="'create-btn'"
-        />
+        <lib-create-item [buttonTitle]="'+'" (created)="createTodolist($event)" [buttonClass]="'create-btn'"/>
       </div>
     </div>
   </div>
