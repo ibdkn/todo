@@ -8,14 +8,18 @@
     [ngClass]="{ 'input-error': inputError }"
     placeholder="Title..."
   />
-  <div class="create-btn">
-    <app-button
-      [title]="buttonTitle"
-      [buttonClass]="buttonClass"
-      (clicked)="onCreate()"
-    ></app-button>
-  </div>
-  @if (inputError) {
-  <div class="input-error-text">{{ inputError }}</div>
-  }
+  <app-button
+    [icon]="'check'"
+    [buttonClass]="buttonClass"
+    (clicked)="onCreate()"
+  ></app-button>
+  <app-button
+    [icon]="'times'"
+    [buttonClass]="buttonClass"
+    (clicked)="onClose()"
+  ></app-button>
+<!-- TODO сейчас не используется, ошибка выводится через toastr, возможно улучшение -->
+<!-- @if (inputError) {-->
+<!-- <div class="input-error-text">{{ inputError }}</div>-->
+<!-- }-->
 </div>

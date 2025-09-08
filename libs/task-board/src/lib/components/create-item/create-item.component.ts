@@ -23,4 +23,8 @@ export class CreateItemComponent {
   showCreateItemForm(): void {
     this.isOpen.set(true);
   }
+
+  hideCreateItemForm(): void {
+    this.isOpen.set(false);
+  }
 }
