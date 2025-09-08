@@ -50,7 +50,6 @@ export class BoardComponent implements OnInit {
   }
 
   createTask(todolistId: number, title: string): void {
-    console.log(todolistId)
     this.store.dispatch(taskActions.createTask({todolistId, title}));
   }
 
