@@ -37,7 +37,7 @@ export const todolistFeature = createFeature({
     on(todolistActions.todolistCreated, (state, payload) => {
       return {
         ...state,
-        todolists: [payload.todolist, ...state.todolists]
+        todolists: [...state.todolists, payload.todolist]
       }
     }),
     on(todolistActions.todolistUpdated, (state, payload) => {

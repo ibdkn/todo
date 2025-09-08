@@ -17,7 +17,7 @@ export const taskFeature = createFeature({
     on(taskActions.loadTasks, (state) => ({
       ...state
     })),
-    on(taskActions.tasksLoaded, (state, { tasks }) => {
+    on(taskActions.tasksLoaded, (state, {tasks}) => {
       const grouped = tasks.reduce((acc, t) => {
         (acc[t.todolistId] ??= []).push(t);
         return acc;
@@ -33,7 +33,7 @@ export const taskFeature = createFeature({
         ...state,
         tasks: {
           ...state.tasks,
-          [payload.todolistId]: [payload.task, ...(state.tasks[payload.todolistId] ?? [])]
+          [payload.todolistId]: [...(state.tasks[payload.todolistId] ?? []), payload.task]
         }
       };
     }),
