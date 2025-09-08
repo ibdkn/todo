@@ -45,6 +45,10 @@ button {
   border: 1px solid var(--button-border-color);
   transition: 0.2s ease-in-out;
 
+  i {
+    font-size: 12px;
+  }
+
   &.delete {
     color: var(--light-text-color);
     background-color: var(--error-color);
