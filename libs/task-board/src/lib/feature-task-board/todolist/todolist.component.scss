@@ -1,7 +1,8 @@
 .todolist {
   display: flex;
   flex-direction: column;
-  width: 280px;
+  max-width: 280px;
+  min-width: 280px;
   max-height: 100%;
   background-color: var(--todolist-bg-color);
   border: 1px solid var(--border-bg-color);
