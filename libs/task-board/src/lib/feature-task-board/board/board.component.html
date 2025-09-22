@@ -1,4 +1,7 @@
 <div class="board">
+  <div class="new-item">
+    <app-create-item-form [itemName]="'column'" (created)="createTodolist($event)" [buttonClass]="'create-btn'"/>
+  </div>
   <div class="board__content">
     <div class="todolists">
       @if (todolists() && todolists().length > 0) {
@@ -17,9 +20,6 @@
           ></app-todolist>
         }
       }
-      <div class="new-todolist">
-        <lib-create-item [buttonTitle]="'+'" (created)="createTodolist($event)" [buttonClass]="'create-btn'"/>
-      </div>
     </div>
   </div>
 </div>

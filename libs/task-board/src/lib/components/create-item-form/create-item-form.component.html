@@ -6,20 +6,14 @@
     (keydown.enter)="onCreate()"
     (input)="onInput()"
     [ngClass]="{ 'input-error': inputError }"
-    placeholder="Title..."
+    [placeholder]="'Enter the ' + itemName + ' name'"
   />
   <app-button
-    [icon]="'check'"
+    [icon]="'plus'"
     [buttonClass]="buttonClass"
     (clicked)="onCreate()"
   ></app-button>
-  <app-button
-    [icon]="'times'"
-    [buttonClass]="buttonClass"
-    (clicked)="onClose()"
-  ></app-button>
-<!-- TODO сейчас не используется, ошибка выводится через toastr, возможно улучшение -->
-<!-- @if (inputError) {-->
-<!-- <div class="input-error-text">{{ inputError }}</div>-->
-<!-- }-->
+  @if (inputError) {
+    <div class="input-error-text">{{ inputError }}</div>
+  }
 </div>

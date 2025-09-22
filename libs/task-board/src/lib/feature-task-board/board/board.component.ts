@@ -7,12 +7,11 @@ import {selectTasks, selectTodolists, taskActions, todolistActions} from '../../
 import { Task } from '../../data/interfaces/task.interface';
 import { FilterValues } from '../../data/interfaces/todolist.interface';
 import { ConfirmDialogComponent } from '@todo/common-ui';
-import {CreateItemComponent} from '../../components/create-item/create-item.component';
 
 
 @Component({
   selector: 'lib-board',
-  imports: [CommonModule, TodolistComponent, ConfirmDialogComponent, CreateItemComponent],
+    imports: [CommonModule, TodolistComponent, ConfirmDialogComponent, CreateItemFormComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })

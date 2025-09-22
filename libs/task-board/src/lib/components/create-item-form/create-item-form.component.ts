@@ -14,49 +14,42 @@ export class CreateItemFormComponent {
   toastr: ToastrService = inject(ToastrService);
   private elRef = inject(ElementRef);
 
-  @Input() buttonTitle!: string;
   @Input() buttonClass!: string;
+  @Input() itemName!: string;
   @Output() created = new EventEmitter();
-  @Output() closed = new EventEmitter();
 
   inputValue: string = '';
-  // TODO сейчас ошибка валидации выводится в toastr (возможно улучшение)
-  inputError: string = ''; // не используется
+  inputError: string = '';
 
   onCreate(): void {
     const title: string = this.inputValue.trim();
     if (!title) {
-      this.toastr.error('Title is required', 'Creating item failed');
+      this.toastr.error(`The name of ${this.itemName} is required`, `Creating new ${this.itemName} was failed`);
+      this.inputError = `The name of ${this.itemName} is required`;
       return;
     }
-    // TODO сейчас ошибка валидации выводится в toastr (возможно улучшение)
-    // this.inputError = '';
-    this.created.emit(title);
+    this.inputError = '';
     this.inputValue = '';
+    this.created.emit(title);
   }
 
-  onClose(): void {
-    this.closed.emit();
-  }
-
-  // Закрыть по Escape
-  @HostListener('document:keydown.escape')
-  handleEscape(): void {
-    this.onClose();
-  }
-
-  // Закрыть при клике вне формы
-  @HostListener('document:click', ['$event'])
-  handleClickOutside(event: MouseEvent): void {
-    if (this.elRef.nativeElement && !this.elRef.nativeElement.contains(event.target)) {
-      this.onClose();
+  onInput(): void {
+    if (this.inputError) {
+      this.inputError = '';
     }
   }
 
-  // TODO сейчас ошибка валидации выводится в toastr (возможно улучшение)
-  onInput(): void {
-    // if (this.inputError) {
-    //   this.inputError = '';
-    // }
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscape(event: KeyboardEvent): void {
+    event.preventDefault();
+    this.onInput();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event): void {
+    const target = event.target as HTMLElement;
+    if (!this.elRef.nativeElement.contains(target)) {
+      this.onInput();
+    }
   }
 }

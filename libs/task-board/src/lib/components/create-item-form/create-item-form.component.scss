@@ -1,16 +1,10 @@
 .create-item-form {
-  height: 50px;
   position: relative;
-  padding: 8px 16px;
-  max-width: 280px;
-  min-width: 280px;
   width: 100%;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   gap: 8px;
-  background-color: var(--todolist-bg-color);
-  border-radius: 8px;
 }
 
 .input-error {
@@ -19,8 +13,8 @@
 
 .input-error-text {
   position: absolute;
-  left: 4px;
-  top: -12px;
+  left: 0;
+  bottom: -14px;
   font-weight: bold;
   font-size: 10px;
   color: var(--error-color);
