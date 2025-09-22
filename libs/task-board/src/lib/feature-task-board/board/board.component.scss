@@ -1,13 +1,23 @@
 .board {
   display: flex;
   flex-direction: column;
-  gap: 30px;
   height: 100%;
+
+  &__header {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-bg-color);
+  }
 
   &__content {
     position: relative;
-    padding: 0 15px;
     flex-grow: 1;
+  }
+
+  &__name {
+    font-size: 18px;
   }
 
   .new-item {
@@ -19,10 +29,10 @@
 .todolists {
   padding: 0;
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  top: 10px;
+  left: 14px;
+  bottom: 10px;
+  right: 14px;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -39,22 +49,32 @@
 @media screen and (max-width: 1024px) {
   .todolists,
   .new-todolist {
-    //display: grid;
-    //grid-template-columns: repeat(3, 1fr);
     gap: 14px;
   }
-}
 
-@media screen and (max-width: 960px) {
-  .todolists,
-  .new-todolist {
-    //grid-template-columns: repeat(2, 1fr);
+  .todolists {
+    left: 10px;
+    right: 10px;
+  }
+
+  .board {
+    &__header {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 }
 
 @media screen and (max-width: 644px) {
-  .todolists,
-  .new-todolist {
-    //grid-template-columns: 1fr;
+  .board {
+    &__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .new-item {
+      align-self: flex-end;
+    }
   }
 }

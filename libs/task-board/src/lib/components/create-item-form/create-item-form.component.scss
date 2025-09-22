@@ -12,12 +12,15 @@
 }
 
 .input-error-text {
+  padding: 0 4px;
   position: absolute;
-  left: 0;
-  bottom: -14px;
+  top: -6px;
+  left: 14px;
   font-weight: bold;
   font-size: 10px;
   color: var(--error-color);
+  background-color: var(--primary-bg-color);
+  border-radius: 3px;
 }
 
 @media screen and (max-width: 1024px) {

@@ -1,6 +1,9 @@
 <div class="board">
-  <div class="new-item">
-    <app-create-item-form [itemName]="'column'" (created)="createTodolist($event)" [buttonClass]="'create-btn'"/>
+  <div class="board__header">
+    <h2 class="board__name">Board name</h2>
+    <div class="new-item">
+      <app-create-item-form [itemName]="'column'" (created)="createTodolist($event)" [buttonClass]="'create-btn'"/>
+    </div>
   </div>
   <div class="board__content">
     <div class="todolists">

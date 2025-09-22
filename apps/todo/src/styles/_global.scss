@@ -81,7 +81,6 @@ ul li {
 }
 
 .container {
-  padding: 0 15px;
   max-width: 100%;
   width: 100%;
 }
@@ -221,12 +220,6 @@ ul li {
 .checkbox-wrapper *:before,
 .checkbox-wrapper *:after {
   box-sizing: inherit;
-}
-
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 0 10px;
-  }
 }
 
 .button {
