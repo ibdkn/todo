@@ -1,5 +1,0 @@
-@if (!isOpen()) {
-  <app-button [icon]="'plus'" [title]="'Add new item'" [buttonClass]="'add-new-item'" (click)="showCreateItemForm()"/>
-} @else {
-  <app-create-item-form [buttonTitle]="'+'" (created)="createHandler($event)" (closed)="hideCreateItemForm()" [buttonClass]="'create-btn'"/>
-}
