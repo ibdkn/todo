@@ -64,5 +64,15 @@ export class TodolistEffects {
         of(todolistActions.todolistFiltered({ todolistId, filter }))
       )
     )
-  })
+  });
+  reorderTodolists = createEffect(() =>
+    this.actions$.pipe(
+      ofType(todolistActions.reorderTodolists),
+      switchMap(({ orderedIds }) =>
+        this.todolistService.reorderTodolists(orderedIds).pipe(
+          map(() => todolistActions.todolistsReordered({ orderedIds }))
+        )
+      )
+    )
+  )
 }

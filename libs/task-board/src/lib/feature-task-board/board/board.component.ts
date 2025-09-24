@@ -5,13 +5,14 @@ import { TodolistComponent } from '../todolist/todolist.component';
 import {Store} from '@ngrx/store';
 import {selectTasks, selectTodolists, taskActions, todolistActions} from '../../data/store';
 import { Task } from '../../data/interfaces/task.interface';
-import { FilterValues } from '../../data/interfaces/todolist.interface';
+import {FilterValues, Todolist} from '../../data/interfaces/todolist.interface';
 import { ConfirmDialogComponent } from '@todo/common-ui';
+import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 
 
 @Component({
   selector: 'lib-board',
-    imports: [CommonModule, TodolistComponent, ConfirmDialogComponent, CreateItemFormComponent],
+  imports: [CommonModule, TodolistComponent, ConfirmDialogComponent, CreateItemFormComponent, CdkDropList, CdkDrag, CdkDragHandle],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -79,5 +80,13 @@ export class BoardComponent implements OnInit {
 
   changeFilter(todolistId: number, filter: FilterValues) {
     this.store.dispatch(todolistActions.filterTodolist({todolistId, filter}))
+  }
+
+  onDrop(event: CdkDragDrop<Todolist[]>) {
+    const arr = [...this.todolists()];
+    moveItemInArray(arr, event.previousIndex, event.currentIndex);
+
+    const orderedIds = arr.map(t => t.id as number);
+    this.store.dispatch(todolistActions.reorderTodolists({ orderedIds }));
   }
 }

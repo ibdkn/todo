@@ -260,3 +260,17 @@ ul li {
   font-size: 12px;
 }
 
+/* Карточка-колонка в обычном состоянии */
+.todolist-wrapper {
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+/* Плейсхолдер на месте, где стояла колонка */
+.cdk-drag-placeholder {
+  opacity: .25;
+}
+
+/* Плавная анимация возврата в слот */
+.cdk-drag-animating {
+  transition: transform .15s ease;
+}

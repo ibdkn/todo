@@ -27,4 +27,8 @@ export class TodolistService {
   deleteTodolist(id: number) {
     return this.http.delete(`${this.baseApiUrl}/${id}`);
   }
+
+  reorderTodolists(ids: number[]) {
+    return this.http.patch(`${this.baseApiUrl}/reorder`, {order: ids});
+  }
 }

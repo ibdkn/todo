@@ -13,6 +13,8 @@ export const todolistActions = createActionGroup({
     'update todolist': props<{ todolistId: number, title: string }>(),
     'todolist updated': props<{ todolist: Todolist }>(),
     'filter todolist': props<{ todolistId: number, filter: FilterValues }>(),
-    'todolist filtered': props<{ todolistId: number; filter: FilterValues }>()
+    'todolist filtered': props<{ todolistId: number; filter: FilterValues }>(),
+    'reorder todolists': props<{ orderedIds: number[] }>(),
+    'todolists reordered': props<{ orderedIds: number[] }>(),
   }
 })

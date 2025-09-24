@@ -6,21 +6,27 @@
     </div>
   </div>
   <div class="board__content">
-    <div class="todolists">
+    <div class="todolist-list" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="todolists()"
+         (cdkDropListDropped)="onDrop($event)">
       @if (todolists() && todolists().length > 0) {
         @for (todolist of todolists(); track todolist.id) {
-          <app-todolist
-            [todolist]="todolist"
-            [tasks]="getFilteredTasks(tasks()[todolist.id], todolist.filter)"
-            [title]="todolist.title"
-            (created)="createTask(todolist.id, $event)"
-            (deleted)="deleteTask(todolist.id, $event)"
-            (statusChanged)="changeTaskStatus(todolist.id, $event)"
-            (filtered)="changeFilter(todolist.id, $event)"
-            (taskTitleChanged)="updateTaskTitle(todolist.id, $event)"
-            (todolistTitleChanged)="updateTodolistTitle(todolist.id, $event)"
-            (confirmDialogOpened)="openConfirmDialog(todolist.id)"
-          ></app-todolist>
+          <div class="todolist-list__wrapper" cdkDrag>
+            <div class="todolist-list__header" cdkDragHandle>
+              <i class="fa fa-grip-vertical"></i>
+            </div>
+            <app-todolist
+              [todolist]="todolist"
+              [tasks]="getFilteredTasks(tasks()[todolist.id], todolist.filter)"
+              [title]="todolist.title"
+              (created)="createTask(todolist.id, $event)"
+              (deleted)="deleteTask(todolist.id, $event)"
+              (statusChanged)="changeTaskStatus(todolist.id, $event)"
+              (filtered)="changeFilter(todolist.id, $event)"
+              (taskTitleChanged)="updateTaskTitle(todolist.id, $event)"
+              (todolistTitleChanged)="updateTodolistTitle(todolist.id, $event)"
+              (confirmDialogOpened)="openConfirmDialog(todolist.id)"
+            ></app-todolist>
+          </div>
         }
       }
     </div>

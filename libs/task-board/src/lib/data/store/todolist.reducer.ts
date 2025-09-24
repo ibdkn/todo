@@ -25,7 +25,7 @@ export const todolistFeature = createFeature({
         todolists: payload.todolists.map(tl => ({
           ...tl,
           filter: 'all' as const
-        }))
+        })).sort((a, b) => a.position - b.position)
       }
     }),
     on(todolistActions.todolistDeleted, (state, payload) => {
@@ -51,6 +51,13 @@ export const todolistFeature = createFeature({
         ...state,
         todolists: state.todolists.map(tl => tl.id === payload.todolistId ? { ...tl, filter: payload.filter } : tl)
       }
-    })
+    }),
+    on(todolistActions.reorderTodolists, (state, { orderedIds }) => {
+      // обновим position по индексу
+      const byId = new Map(state.todolists.map(t => [t.id, t]));
+      const next = orderedIds.map((id, index) => ({ ...byId.get(id)!, position: index }));
+      return { ...state, todolists: next };
+    }),
+    on(todolistActions.todolistsReordered, (state) => state),
   )
 })
