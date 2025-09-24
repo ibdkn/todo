@@ -2,6 +2,7 @@ export interface Todolist {
   id: number;
   userId: number;
   title: string;
+  position: number,
   createdAt: string;
   updatedAt: string;
   filter: FilterValues;
